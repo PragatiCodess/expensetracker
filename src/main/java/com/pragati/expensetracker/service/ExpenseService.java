@@ -20,4 +20,24 @@ public class ExpenseService {
     public List<Expense> getAllExpenses() {
         return repository.findAll();
     }
+
+    public Expense updateExpense(Long id, Expense updatedExpense) {
+
+
+        Expense expense = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Expense not found"));
+
+        expense.setTitle(updatedExpense.getTitle());
+        expense.setAmount(updatedExpense.getAmount());
+
+        return repository.save(expense);
+    }
+
+public void deleteExpense(Long id) {
+
+repository.deleteById(id);
+
+}
+
+
 }

@@ -11,16 +11,34 @@ import java.util.List;
 @RequestMapping("/expenses")
 public class ExpenseController {
 
-    @Autowired
-    private ExpenseService service;
+@Autowired
+private ExpenseService service;
 
-    @PostMapping
-    public Expense addExpense(@RequestBody Expense expense) {
-        return service.saveExpense(expense);
-    }
+@PostMapping
+public Expense addExpense(@RequestBody Expense expense) {
+    return service.saveExpense(expense);
+}
 
-    @GetMapping
-    public List<Expense> getExpenses() {
-        return service.getAllExpenses();
-    }
+@GetMapping
+public List<Expense> getExpenses() {
+    return service.getAllExpenses();
+}
+
+@PutMapping("/{id}")
+public Expense updateExpense(@PathVariable Long id,
+                             @RequestBody Expense updatedExpense) {
+
+    return service.updateExpense(id, updatedExpense);
+}
+
+@DeleteMapping("/{id}")
+public String deleteExpense(@PathVariable Long id) {
+
+service.deleteExpense(id);
+
+return "Expense deleted successfully";
+
+}
+
+
 }
