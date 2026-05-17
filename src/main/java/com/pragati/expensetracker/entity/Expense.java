@@ -7,41 +7,63 @@ import jakarta.validation.constraints.Positive;
 @Entity
 public class Expense {
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-@NotBlank(message = "Title cannot be empty")
-private String title;
+    @NotBlank(message = "Title cannot be empty")
+    private String title;
 
-@Positive(message = "Amount must be positive")
-private double amount;
+    @Positive(message = "Amount must be positive")
+    private double amount;
 
-public Expense() {
-}
+    @NotBlank(message = "Category cannot be empty")
+    private String category;
 
-public Long getId() {
-    return id;
-}
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-public String getTitle() {
-    return title;
-}
+    public Expense() {
+    }
 
-public double getAmount() {
-    return amount;
-}
+    public Long getId() {
+        return id;
+    }
 
-public void setId(Long id) {
-    this.id = id;
-}
+    public String getTitle() {
+        return title;
+    }
 
-public void setTitle(String title) {
-    this.title = title;
-}
+    public double getAmount() {
+        return amount;
+    }
 
-public void setAmount(double amount) {
-    this.amount = amount;
-}
+    public String getCategory() {
+        return category;
+    }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
